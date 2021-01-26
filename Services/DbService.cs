@@ -70,7 +70,7 @@ namespace LunchMenuLogger
                 using (var cmd = new MySqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = string.Format("INSERT INTO saved_lunch_menus (SavedAt,Checksum,ValidFrom,ValidTo) VALUES ('{0:yyyy-MM-dd hh:mm:ss}','{1}','{2:yyyy-MM-dd}','{3:yyyy-MM-dd}')", DateTime.Now, checksum, lm.ValidFrom, lm.ValidTo);
+                    cmd.CommandText = string.Format("INSERT INTO saved_lunch_menus (SavedAt,Checksum,ValidFrom,ValidTo) VALUES ('{0:yyyy-MM-dd HH:mm:ss}','{1}','{2:yyyy-MM-dd}','{3:yyyy-MM-dd}')", DateTime.Now, checksum, lm.ValidFrom, lm.ValidTo);
                     await cmd.ExecuteNonQueryAsync();
                 }
 
