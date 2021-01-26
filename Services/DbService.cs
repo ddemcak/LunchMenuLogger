@@ -11,12 +11,12 @@ namespace LunchMenuLogger
         public static string _DbServer = "127.0.0.1";
         public static string _DbUser = "root";
         public static string _DbPass = "pwdpwd";
-        public static string _DbDatabase = "test";
+        public static string _DbName = "test";
 
 
         private static string ConnectionString()
         {
-            return string.Format("Server={0};User ID={1};Password={2};Database={3}", _DbServer, _DbUser, _DbPass, _DbDatabase);
+            return string.Format("Server={0};User ID={1};Password={2};Database={3}", _DbServer, _DbUser, _DbPass, _DbName);
         }
 
 

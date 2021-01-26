@@ -1,4 +1,5 @@
 ﻿
+using LunchMenuLogger.Configurators;
 using MySqlConnector;
 using System;
 using System.IO;
@@ -13,18 +14,45 @@ namespace LunchMenuLogger
 {
     class Program
     {
-        private static string _localtestfilename = "technopark_cz_1.pdf";
-        private static string[] _localtestfiles = { "technopark_cz_1.pdf", "technopark_cz_2.pdf", "technopark_cz_3.pdf", "technopark_cz_4.pdf" };
-
         private static string _menufilename = "lunchmenu.pdf";
-        private static string _url = "https://cookforlife.cz/jidelni-listky/technopark_cz.pdf";
+        
+        #region PROPERTIES
 
+        private static ConfigurationFileManager cfm;
+        private static string LunchMenuUrl = "";
 
-        //private static string _menufilename = "technopark_cz_4.pdf";
-
+        #endregion
 
         static void Main(string[] args)
         {
+            if (args.Length != 1)
+            {
+                Console.WriteLine("Please provide CONFIG filename as parameter!");
+                return;
+            }
+
+            Console.WriteLine("Loading CONFIG file...");
+            string configFile = args[0];
+
+
+            if (!File.Exists(configFile))
+            {
+                Console.WriteLine("CONFIG file does not exist! Exiting application...");
+                return;
+            }
+            else
+            {
+                cfm = new ConfigurationFileManager(configFile);
+
+
+                LunchMenuUrl = cfm.LunchMenuUrl;
+                DbService._DbServer = cfm.DbServer;
+                DbService._DbName = cfm.DbName;
+                DbService._DbPass = cfm.DbPass;
+                DbService._DbName = cfm.DbName;
+            }
+
+
             Console.WriteLine("Downloading document...");
             DownloadPDF();
 
@@ -46,7 +74,8 @@ namespace LunchMenuLogger
             File.Copy(_menufilename, newfilename);
 
             Console.WriteLine("Processing menu...");
-            string menu = GetText(newfilename);
+            string menu = GetRawTextFromFile(newfilename);
+            
             LunchMenu lm = new LunchMenu(menu);
             Console.WriteLine(lm.ToString());
 
@@ -58,7 +87,7 @@ namespace LunchMenuLogger
 
         }
 
-        static string GetText(string pdffilename)
+        static string GetRawTextFromFile(string pdffilename)
         {
             using (PdfDocument document = PdfDocument.Open(pdffilename))
             {
@@ -84,7 +113,7 @@ namespace LunchMenuLogger
         {
             using (var client = new WebClient())
             {
-                client.DownloadFile(_url, _menufilename);
+                client.DownloadFile(LunchMenuUrl, _menufilename);
             }
         }
                 

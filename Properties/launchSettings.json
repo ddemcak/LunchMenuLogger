@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LunchMenuLogger": {
+      "commandName": "Project",
+      "commandLineArgs": "config.ini"
+    }
+  }
+}
