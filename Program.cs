@@ -21,6 +21,7 @@ namespace LunchMenuLogger
         private static ConfigurationFileManager cfm;
         private static string LunchMenuUrl = "";
 
+        
         #endregion
 
         static void Main(string[] args)
@@ -46,10 +47,8 @@ namespace LunchMenuLogger
 
 
                 LunchMenuUrl = cfm.LunchMenuUrl;
-                DbService._DbServer = cfm.DbServer;
-                DbService._DbName = cfm.DbName;
-                DbService._DbPass = cfm.DbPass;
-                DbService._DbName = cfm.DbName;
+                DbService.SetConnectionParameters(cfm.DbServer, cfm.DbUser, cfm.DbPass, cfm.DbName);
+                
             }
 
 

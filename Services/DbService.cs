@@ -8,16 +8,26 @@ namespace LunchMenuLogger
 {
     static class DbService
     {
-        public static string _DbServer = "127.0.0.1";
-        public static string _DbUser = "root";
-        public static string _DbPass = "pwdpwd";
-        public static string _DbName = "test";
+        private static string DbServer = "127.0.0.1";
+        private static string DbUser = "root";
+        private static string DbPass = "pwdpwd";
+        private static string DbName = "test";
+
+
+        public static void SetConnectionParameters(string dbServer, string dbUser, string dbPass, string dbName)
+        {
+            DbServer = dbServer;
+            DbUser = dbUser;
+            DbPass = dbPass;
+            DbName = dbName;
+        }
 
 
         private static string ConnectionString()
         {
-            return string.Format("Server={0};User ID={1};Password={2};Database={3}", _DbServer, _DbUser, _DbPass, _DbName);
+            return string.Format("Server={0};User ID={1};Password={2};Database={3}", DbServer, DbUser, DbPass, DbName);
         }
+
 
 
         public static async Task SaveLunchMenuToDatabaseAsync(LunchMenu lm)
