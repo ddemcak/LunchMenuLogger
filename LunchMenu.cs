@@ -55,9 +55,6 @@ namespace LunchMenuLogger
 
             if (match.Success)
             {
-                //Regex rgx2 = new Regex(@"[0-9]{1,3}.Kč");
-                //Match match2 = rgx2.Match(match.Value.Replace("Pondělí:", "").Replace("Úterý:", ""));
-
                 string[] items = match.Value.Replace(fromDay, "").Replace(toDay, "").Trim().Split("Kč");
 
                 foreach (string item in items)
