@@ -1,9 +1,9 @@
 # Lunch Menu Logger
 
 Simple .net core application capable of:
-- Downloading specific *.pdf* file.
-- Parsing text from the file.
-- Saving data to database.
+- Downloading a menu *.pdf* file.
+- Parsing text from the file with specific format.
+- Saving data to database only if it was not saved earlier.
 
 ## How to use ##
 Build or download Release package and set proper parameters to *config.ini* dile.
