@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/bin/Debug/net5.0/LunchMenuLogger.dll",
-            "args": [],
+            "args": ["${workspaceFolder}/bin/Debug/net5.0/config.ini"],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false
