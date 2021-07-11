@@ -73,12 +73,12 @@ namespace LunchMenuLogger
 
         private string FindAlergens(string text)
         {
-            Regex rgx = new Regex(@"\([A,\d]+\)");
+            Regex rgx = new Regex(@"\([A\d,\.]+\)");
             Match match = rgx.Match(text);
 
             if (match.Success)
             {
-                return match.Value.Replace("(", "").Replace(")", "");
+                return match.Value.Replace("(", "").Replace(")", "").Replace(".",",");
             }
 
             return null;
