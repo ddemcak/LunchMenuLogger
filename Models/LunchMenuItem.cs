@@ -152,9 +152,11 @@ namespace LunchMenuLogger
             NumberFormatInfo nfi = new NumberFormatInfo();
             nfi.NumberDecimalSeparator = ".";
 
-            if (FoodType == FoodType.soup) return string.Format("'{0}','{1}','{2}','{3:yyyy-MM-dd}','{4}','{5}'", Name, Price, FoodType, Day, Volume.ToString(nfi), Alergens);
-            else if (Weight != 0) return string.Format("'{0}','{1}','{2}','{3:yyyy-MM-dd}','{4}','{5}'", Name, Price, FoodType, Day, Weight.ToString(nfi), Alergens);
-            else return string.Format("'{0}','{1}','{2}','{3:yyyy-MM-dd}','{4}','{5}'", Name, Price, FoodType, Day, Pieces.ToString(nfi), Alergens);
+            string nameSqlFriendly = Name.Replace("\"", "\"\"").Replace("\'", "\'\'");
+
+            if (FoodType == FoodType.soup) return string.Format("'{0}','{1}','{2}','{3:yyyy-MM-dd}','{4}','{5}'", nameSqlFriendly, Price, FoodType, Day, Volume.ToString(nfi), Alergens);
+            else if (Weight != 0) return string.Format("'{0}','{1}','{2}','{3:yyyy-MM-dd}','{4}','{5}'", nameSqlFriendly, Price, FoodType, Day, Weight.ToString(nfi), Alergens);
+            else return string.Format("'{0}','{1}','{2}','{3:yyyy-MM-dd}','{4}','{5}'", nameSqlFriendly, Price, FoodType, Day, Pieces.ToString(nfi), Alergens);
         }
     }
 
