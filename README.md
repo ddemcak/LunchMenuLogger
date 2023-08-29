@@ -1,5 +1,7 @@
 # Lunch Menu Logger
 
+Current version: 1.0.1
+
 Simple .net core application capable of:
 - Downloading a menu *.pdf* file.
 - Parsing text from the file with specific format.
