@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -55,7 +56,22 @@ namespace LunchMenuLogger
 
             if (match.Success)
             {
-                string[] items = match.Value.Replace(fromDay, "").Replace(toDay, "").Trim().Split("Kč");
+                string[] items = new string[0];
+
+                // In case there are no prices on the menu, use ) as row delimiter.
+                if (match.Value.Contains("Kč"))
+                {
+                    items = match.Value.Replace(fromDay, "").Replace(toDay, "").Trim().Split("Kč");
+                }
+                else
+                {
+                    items = match.Value.Replace(fromDay, "").Replace(toDay, "").Trim().Split(")");
+
+                    for (int i = 0; i < items.Length; i++)
+                    {
+                        if (items[i].Length > 0) items[i] += ")";
+                    }
+                }
 
                 foreach (string item in items)
                 {
